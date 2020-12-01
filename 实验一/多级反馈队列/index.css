@@ -1,0 +1,56 @@
+#main {
+    height: 700px;
+    position: relative;
+    width: 1500px;
+    float: left;
+    background-color: #fff;
+}
+
+#input-list {
+    width: 200px;
+    float: right;
+    margin: 100px 30px;
+}
+
+.input-list-item {
+    width: 180px;
+    height: 30px;
+    line-height: 30px;
+    background-color: #eee;
+    margin: 10px auto;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pcb-queue {
+    position: absolute;
+    height: 100px;
+    width: 1000px;
+
+    /*margin-bottom: 20px;*/
+    /*background-color: #000;*/
+}
+
+.pcb{
+    width: 150px;
+    height: 90px;
+    /*float: left;*/
+    position: absolute;
+    /*display: inline-block;*/
+    top: -30px;
+    margin-left: 15px;
+    border-radius: 5px;
+    background-color: #eee;
+    padding: 10px 0;
+    transition: 0.3s;
+
+}
+.pcb > div {
+    text-align: center;
+    /*margin: auto;*/
+}
+
+.processing {
+    left: 250px;
+    top: 10px
+}

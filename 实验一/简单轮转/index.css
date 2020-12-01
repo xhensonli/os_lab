@@ -1,0 +1,33 @@
+#main {
+    position: relative;
+    width: 1500px;
+    height: 700px;
+
+}
+
+#input-list {
+    float: right;
+    width: 200px;
+    padding: 15px;
+    margin: 150px 0;
+
+}
+.input-list-item {
+    height: 30px;
+    border-radius: 5px;
+    background-color: #eee;
+    text-align: center;
+    line-height: 30px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+.input-list-item:hover{
+    background-color: #ddd;
+}
+
+.pcb {
+    position: absolute;
+    transition: 0.4s;
+    padding: 10px;
+    background-color: #eee;
+}

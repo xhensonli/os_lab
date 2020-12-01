@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/qs/6.9.1/qs.js"></script>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="index.css">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<body>
+    <div id="main">
+        <!--{{processing}}-->
+        <!--{{pcbList}}-->
+        <div class="pcb" v-for="p in list"
+             :key="p.name"
+             :style="{top: p === processing ? '100px' : '400px', left: p === processing ? '500px' : (pcbList.indexOf(p) + 1) * 160 + 'px'}">
+            <div>
+                进程名：{{p.name}}
+            </div>
+            <div>
+                服务时间：{{p.serveTime}}
+            </div>
+            <div>
+                已执行时间: {{p.serveTime - p.needTime}}
+            </div>
+        </div>
+
+        <div id="input-list">
+            一个时间片为4个单位
+            <div class="input-list-item" v-for="(item, index) in inputList" @click="createPCB(item)">
+                添加时间为{{item}}个单位的任务
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
