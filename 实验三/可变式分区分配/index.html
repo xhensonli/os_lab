@@ -19,14 +19,18 @@
 <body>
     <div id="main" >
         <div id="serve-type-select">
-            <el-radio v-model="serveType" :label="1">首次适应</el-radio>
-            <el-radio v-model="serveType" :label="2">循环首次适应</el-radio>
+            <el-radio v-model="serveType" :label="1" :disabled="isRunning" >首次适应</el-radio>
+            <el-radio v-model="serveType" :label="2" :disabled="isRunning">循环首次适应</el-radio>
         </div>
-
+        <div id="btn-bar">
+            <el-button type="primary" @click="process" :disabled="isRunning">开始</el-button>
+            <el-button type="primary" @click="reset" :disabled="isRunning">重置</el-button>
+        </div>
         <div class="display-area">
 
             <el-table
                     :data="memTable"
+                    :row-class-name="memTableClassName"
                     style="width: 100%">
                 <el-table-column
                         type="index"
