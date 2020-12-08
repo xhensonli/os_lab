@@ -19,15 +19,18 @@
     text-align: center;
     line-height: 30px;
     margin: 10px 0;
+    box-shadow: 0 0 5px #aaa;
     cursor: pointer;
 }
 .input-list-item:hover{
     background-color: #ddd;
+
 }
 
 .pcb {
     position: absolute;
     transition: 0.4s;
     padding: 10px;
-    background-color: #eee;
+    background-color: #fff;
+    box-shadow: 0 0 5px #aaa;
 }

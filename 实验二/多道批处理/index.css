@@ -1,0 +1,51 @@
+#serve-type-select {
+    text-align: center;
+    margin-top: 25px;
+}
+
+#resource-control {
+    float: left;
+    margin: 20px;
+}
+#resource-control > div{
+    float: left;
+    margin: 10px;
+}
+#add-job-btn-bar {
+    float: left;
+    margin: 20px;
+}
+.display-area {
+    width: 60%;
+    margin: 30px auto;
+
+}
+
+
+.el-table .running-row {
+    background: #f0f9eb;
+}
+
+.el-table .waiting-row {
+    background: oldlace;
+}
+.el-table .finish-row {
+    background: #f4f4f4;
+}
+
+
+
+
+.empty-data{
+    margin-top: 150px;
+    text-align: center;
+    color: dodgerblue;
+    opacity: .3;
+}
+.empty-data .empty-box{
+    font-size: 128px;
+    padding-bottom: 25px;
+}
+.empty-data .empty-data-text{
+    font-size: 36px;
+}

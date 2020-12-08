@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实验二</title>
+    <script src="../../static/js/jquery-3.3.1.min.js"></script>
+    <script src="../../static/js/vue.js"></script>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="index.css">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../static/css/element.css">
+    <script src="../../static/js/element.js"></script>
+</head>
+<body>
+    <div id="main" >
+        <div id="serve-type-select">
+            <el-radio v-model="serveType" :label="1">先来先服务</el-radio>
+            <el-radio v-model="serveType" :label="2">短作业优先</el-radio>
+            <el-radio v-model="serveType" :label="3">响应比高者优先</el-radio>
+        </div>
+        <div id="add-job-btn-bar">
+            <el-button type="primary" @click="dialogFormVisible = true">添加作业</el-button>
+        </div>
+        <el-dialog title="添加作业" :visible.sync="dialogFormVisible" width="400px">
+            <el-form :model="inputJcb">
+                <el-form-item label="作业名">
+                    <el-input v-model="inputJcb.jobName" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="到达时间" >
+                    <el-input v-model="inputJcb.arriveTime" ></el-input>
+                </el-form-item>
+                <el-form-item label="服务时间">
+                    <el-input v-model="inputJcb.serveTime" ></el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="addJcb">添 加</el-button>
+            </div>
+        </el-dialog>
+        <div class="display-area">
+            <div class="empty-data" v-if="jcbList.length === 0">
+                <div class="el-icon-box empty-box"></div>
+                <div class="empty-data-text">暂无作业</div>
+            </div>
+            <el-table
+                    v-else
+                    :summary-method="getAverage"
+                    show-summary
+                    :data="jcbList"
+                    style="width: 100%">
+                <el-table-column
+                        prop="jobName"
+                        label="作业名">
+                </el-table-column>
+                <el-table-column
+                        prop="arriveTime"
+                        label="到达时间">
+                </el-table-column>
+                <el-table-column
+                        prop="serveTime"
+                        label="服务时间">
+                </el-table-column>
+                <el-table-column
+                        prop="startTime"
+                        label="开始时间">
+                </el-table-column>
+                <el-table-column
+                        prop="finishTime"
+                        label="结束时间">
+                </el-table-column>
+                <el-table-column
+                        prop="turnRoundTime"
+                        label="周转时间">
+                </el-table-column>
+                <el-table-column
+                        prop="weightedTurnRoundTime"
+                        label="带权周转时间">
+                </el-table-column>
+                <el-table-column label="操作">
+                    <template slot-scope="scope">
+                        <el-button
+                                size="mini"
+                                class="el-icon-delete"
+                                type="danger"
+                                @click="deleteJcb(scope.$index)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+    </div>
+</body>
+</html>

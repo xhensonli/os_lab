@@ -9,17 +9,21 @@
 #input-list {
     width: 200px;
     float: right;
-    margin: 100px 30px;
+    margin: 70px 30px;
 }
 
 .input-list-item {
     width: 180px;
-    height: 30px;
-    line-height: 30px;
-    background-color: #eee;
-    margin: 10px auto;
-    text-align: center;
-    cursor: pointer;
+    /*height: 30px;*/
+    /*line-height: 30px;*/
+    /*background-color: #fff;*/
+    /*box-shadow: 0 0 5px #aaa;*/
+    margin: 5px auto;
+    /*text-align: center;*/
+    /*cursor: pointer;*/
+}
+.input-list-item:hover {
+    background-color: #f1f1f1;
 }
 
 .pcb-queue {
@@ -40,7 +44,8 @@
     top: -30px;
     margin-left: 15px;
     border-radius: 5px;
-    background-color: #eee;
+    background-color: #fff;
+    box-shadow: 0 0 5px #e6a23c;
     padding: 10px 0;
     transition: 0.3s;
 
@@ -51,6 +56,5 @@
 }
 
 .processing {
-    left: 250px;
-    top: 10px
+    box-shadow: 0 0 5px #13ce66;
 }

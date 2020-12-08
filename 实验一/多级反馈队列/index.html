@@ -6,14 +6,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script src="jquery-3.3.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="axios.min.js"></script>
-    <script src="https://cdn.bootcss.com/qs/6.9.1/qs.js"></script>
+    <script src="../../static/js/jquery-3.3.1.min.js"></script>
+    <script src="../../static/js/vue.js"></script>
     <script src="index.js"></script>
     <link rel="stylesheet" href="index.css">
     <!-- 引入样式 -->
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="../../static/css/element.css">
+    <script src="../../static/js/element.js"></script>
 </head>
 <body>
 
@@ -23,7 +22,7 @@
             2^{{index}}个时间片
         </div>
 
-        <div class="pcb" v-for="(p, idx) in pcbList" :style="{top: p === processing? '10px' : p.pri * 150 - 20 + 'px', left: p === processing? '250px' : (queues[p.pri - 1].indexOf(p) + 1)* 160 + 'px'}"
+        <div class="pcb" v-for="(p, idx) in pcbList" :class="{processing: p === processing}" :style="{top: p === processing? '10px' : p.pri * 150 - 20 + 'px', left: p === processing? '250px' : (queues[p.pri - 1].indexOf(p) + 1)* 160 + 'px'}"
              :key="p.name">
             <div>
             进程名：{{p.name}}
@@ -39,7 +38,9 @@
             </div>
         </div>
         <div id="input-list">
-            <div class="input-list-item" v-for="item in createList" @click="createPCB(item)">增加{{item}}时间片长度任务</div>
+            <div class="input-list-item"  v-for="item in createList" >
+                <el-button type="primary" @click="createPCB(item)">增加{{item}}时间片长度任务</el-button>
+            </div>
         </div>
     </div>
 

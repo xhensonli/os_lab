@@ -28,7 +28,9 @@ $(function () {
                     if (this.processing == null) {
                         this.processing = this.pcbList[0];
                         this.pcbList.splice(0, 1);
+                        return;
                     }
+                    this.processing && this.processing.needTime--;
                     if (this.period === 3) {
                         if (this.processing.needTime !==0) {
                             this.pcbList.push(this.processing);
@@ -45,7 +47,7 @@ $(function () {
                             this.period = 0;
                         } else this.period++;
                     }
-                    this.processing && this.processing.needTime--;
+
                 }
             }, 500);
         }
