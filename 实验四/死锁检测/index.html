@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实验四</title>
+    <script src="../../static/js/jquery-3.3.1.min.js"></script>
+    <script src="../../static/js/vue.js"></script>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="index.css">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../static/css/element.css">
+    <script src="../../static/js/element.js"></script>
+</head>
+<body>
+    <div id="main" >
+
+        <div id="btn-bar">
+            <el-button type="primary" @click="dialogFormVisible = true" >添加</el-button>
+        </div>
+        <div id="resource-control">
+            <div>
+                资源1：<el-input-number size="mini"  v-model="totalResource1"></el-input-number>
+            </div>
+            <div>
+                资源2：<el-input-number size="mini"  v-model="totalResource2"></el-input-number>
+            </div>
+        </div>
+        <el-dialog title="添加进程" :visible.sync="dialogFormVisible" width="400px">
+            <el-form :model="inputProcess">
+                <el-form-item label="进程名">
+                    <el-input v-model="inputProcess.processName" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="持有资源1" >
+                    <el-input-number v-model="inputProcess.hasResource1" ></el-input-number>
+                </el-form-item>
+                <el-form-item label="持有资源2">
+                    <el-input-number v-model="inputProcess.hasResource2" ></el-input-number>
+                </el-form-item>
+                <el-form-item label="需要资源1" >
+                    <el-input-number v-model="inputProcess.needResource1" ></el-input-number>
+                </el-form-item>
+                <el-form-item label="需要资源2">
+                    <el-input-number v-model="inputProcess.needResource2" ></el-input-number>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="addProcess">添 加</el-button>
+            </div>
+        </el-dialog>
+        <div class="display-area">
+
+            <el-table
+                    :data="processList"
+                    :row-class-name="getRowColor"
+                    style="width: 100%">
+                <el-table-column
+                        prop="processName"
+                        label="进程名"
+                     >
+                </el-table-column>
+                <el-table-column
+                        prop="hasResource1"
+                        label="持有资源1">
+                </el-table-column>
+                <el-table-column
+                        prop="hasResource2"
+                        label="持有资源2">
+                </el-table-column>
+                <el-table-column
+                        prop="needResource1"
+                        label="需要资源1">
+                </el-table-column>
+                <el-table-column
+                        prop="needResource2"
+                        label="需要资源2">
+                </el-table-column>
+                <el-table-column label="操作">
+                    <template slot-scope="scope">
+                        <el-button
+                                size="mini"
+                                class="el-icon-delete"
+                                type="danger"
+                                @click="deleteProcess(scope.$index)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+    </div>
+</body>
+</html>

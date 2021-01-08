@@ -1,10 +1,17 @@
-#main {
+#map {
     height: 700px;
     position: relative;
     width: 1500px;
     float: left;
     background-color: #fff;
 }
+
+#record-display {
+    width: 60%;
+    margin:auto;
+
+}
+
 
 #input-list {
     width: 200px;

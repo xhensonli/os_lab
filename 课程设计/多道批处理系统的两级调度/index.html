@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实验二</title>
+    <script src="../../static/js/jquery-3.3.1.min.js"></script>
+    <script src="../../static/js/vue.js"></script>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="index.css">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../static/css/element.css">
+    <script src="../../static/js/element.js"></script>
+</head>
+<body>
+    <div id="main" >
+        <div id="time-display">
+            当前时间：
+            <el-time-select
+                    :value="num2Time(globalTime)"
+                    readonly>
+            </el-time-select>
+        </div>
+        <div id="serve-type-select">
+            <div id="job-type-select">
+                作业调度：
+                <el-radio v-model="jobServeType" :disabled="isRunning" :label="1">先来先服务</el-radio>
+                <el-radio v-model="jobServeType" :disabled="isRunning" :label="2">短作业优先</el-radio>
+            </div>
+            <div id="process-type-select">
+                进程调度：
+                <el-radio v-model="processServeType" :disabled="isRunning" :label="1">先来先服务</el-radio>
+                <el-radio v-model="processServeType" :disabled="isRunning" :label="2">短进程优先</el-radio>
+            </div>
+        </div>
+        <div id="add-job-btn-bar">
+            <el-button type="primary" @click="dialogFormVisible = true" :disabled="isRunning" >添加作业</el-button>
+            <el-button type="primary" @click="start" :disabled="isRunning" >开始</el-button>
+            <el-button type="primary" @click="reset" :disabled="isRunning" >重置</el-button>
+        </div>
+        <div id="resource-control">
+            <div>
+                总内存：<el-input-number size="mini" :disabled="isRunning" v-model="totalMemory"></el-input-number>
+            </div>
+            <div>
+                总磁带机：<el-input-number size="mini" :disabled="isRunning" v-model="totalTapeDriver"></el-input-number>
+            </div>
+        </div>
+
+        <el-dialog title="添加作业" :visible.sync="dialogFormVisible" width="400px">
+            <el-form :model="inputJcb">
+                <el-form-item label="作业名">
+                    <el-input v-model="inputJcb.jobName" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="到达时间" >
+                    <el-time-select
+                            placeholder="到达时间"
+                            v-model="inputJcb.arriveTime"
+                            :picker-options="{
+                                          start: '10:00',
+                                          step: '00:05',
+                                          end: '12:00'
+                                        }"
+                            placeholder="任意时间点">
+                    </el-time-select>
+                </el-form-item>
+                <el-form-item label="服务时间">
+                    <el-input v-model="inputJcb.serveTime" ></el-input>
+                </el-form-item>
+                <el-form-item label="需要内存">
+                    <el-input v-model="inputJcb.needMemory" ></el-input>
+                </el-form-item>
+                <el-form-item label="需要磁带机">
+                    <el-input v-model="inputJcb.needTapeDriver" ></el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="addJcb">添 加</el-button>
+            </div>
+        </el-dialog>
+
+        <div class="display-tables">
+            <div class="display-area-mem">
+                <el-table
+                        :data="memTable"
+                        style="width: 100%">
+                    <el-table-column
+                            type="index"
+                            label="分区号"
+                            width="100">
+                    </el-table-column>
+                    <el-table-column
+                            prop="partitionAddr"
+                            label="起始地址">
+                    </el-table-column>
+                    <el-table-column
+                            prop="partitionSize"
+                            label="分区大小">
+                    </el-table-column>
+                    <el-table-column
+                            prop="message"
+                            label="使用状态">
+                    </el-table-column>
+                </el-table>
+            </div>
+            <div class="display-area-job">
+                <div class="empty-data" v-if="jcbList.length === 0">
+                    <div class="el-icon-box empty-box"></div>
+                    <div class="empty-data-text">暂无作业</div>
+                </div>
+                <el-table
+                        v-else
+                        :data="jcbList"
+                        :row-class-name="tableRowClassName"
+                        style="width: 100%">
+                    <el-table-column
+                            prop="jobName"
+                            label="作业名">
+                    </el-table-column>
+                    <el-table-column
+                            prop="arriveTime"
+                            label="到达时间">
+                    </el-table-column>
+                    <el-table-column
+                            prop="serveTime"
+                            label="服务时间">
+                    </el-table-column>
+                    <el-table-column
+                            prop="finishTime"
+                            label="完成时间">
+                    </el-table-column>
+                    <el-table-column
+                            prop="status"
+                            label="状态">
+                    </el-table-column>
+                    <el-table-column
+                            prop="needMemory"
+                            label="所需内存">
+                    </el-table-column>
+                    <el-table-column
+                            prop="needTapeDriver"
+                            label="所需磁带机">
+                    </el-table-column>
+
+                </el-table>
+
+            </div>
+            <div class="display-area-process">
+                <div class="empty-data" v-if="pcbList.length === 0">
+                    <div class="el-icon-box empty-box"></div>
+                    <div class="empty-data-text">暂无进程</div>
+                </div>
+                <el-table
+                        v-else
+                        :data="pcbList"
+                        :row-class-name="pcbTableRowClassName"
+                        style="width: 100%">
+                    <el-table-column
+                            prop="jobName"
+                            label="作业名">
+                    </el-table-column>
+                    <el-table-column
+                            prop="needTime"
+                            label="所需时间">
+                    </el-table-column>
+                    <el-table-column
+                            prop="serveTime"
+                            label="使用时间">
+                    </el-table-column>
+                    <el-table-column
+                            prop="status"
+                            label="状态">
+                    </el-table-column>
+                </el-table>
+            </div>
+        </div>
+
+        <div v-if="recordList.length !== 0">
+            <el-divider></el-divider>
+            <el-table
+                    :data="recordList"
+                    style="width: 100%">
+                <el-table-column
+                        prop="time"
+                        label="时间">
+                </el-table-column>
+                <el-table-column
+                        prop="name"
+                        label="作业名">
+                </el-table-column>
+                <el-table-column
+                        prop="message"
+                        label="信息">
+                </el-table-column>
+
+            </el-table>
+        </div>
+    </div>
+</body>
+</html>

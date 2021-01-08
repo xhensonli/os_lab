@@ -1,0 +1,108 @@
+
+.system-msgs {
+    float: left;
+    margin-top: 50px;
+}
+.system-msgs > div {
+    /*float: left;*/
+    width: 200px;
+    height: 50px;
+    padding: 5px;
+    /*line-height: 50px;*/
+    margin-left: 10px;
+    margin-top: 5px;
+    text-align: center;
+    /*overflow-x: scroll;*/
+    /*overflow-y: hidden;*/
+    box-shadow: 0 0 5px #aaa;
+}
+.msg-title {
+    border-bottom: 1px dashed #999;
+}
+.system-msgs > .schedule-order {
+    height: 150px;
+}
+#disk-display {
+    float: left;
+    position: relative;
+}
+.track {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid #888;
+    background-color: #000;
+    background-image: conic-gradient(at 50% 50%, #555 0%, #000 25%, #555 50%, #000 75%, #555 100%);
+    animation: myRotate 5s infinite;
+    -webkit-animation: myRotate 1s infinite linear;
+    box-sizing: border-box;
+}
+@keyframes myRotate{
+    from  {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+    /*from {background: red;}*/
+    /*to {background: yellow;}*/
+}
+
+.pointer {
+    height: 260px;
+    width: 10px;
+    position: absolute;
+    top: 120px;
+    left: 425px;
+    background-color: #aaa;
+    border-radius: 0 0 50% 50%;
+    transition: 1s linear;
+}
+.reading-pointer {
+    background-color: #f0f9eb;
+}
+
+.queue{
+    width: 100px;
+    height: 600px;
+    position: absolute;
+    left: 1150px;
+    border: 1px solid #aaa;
+    transition: 500ms;
+}
+.queue.using {
+    left: 1000px;
+}
+.queue-item {
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    background-color: #fff;
+    border: 1px solid #aaa;
+    box-sizing: border-box;
+    transition: 500ms;
+    text-align: center;
+}
+.reading-item {
+    background-color: #f0f9eb;
+}
+
+.el-table .safe-row {
+    background: #f0f9eb;
+
+}
+
+.el-table .unsafe-row {
+    background: oldlace;
+}
+
+
+
+.empty-data{
+    margin-top: 150px;
+    text-align: center;
+    color: dodgerblue;
+    opacity: .3;
+}
+.empty-data .empty-box{
+    font-size: 128px;
+    padding-bottom: 25px;
+}
+.empty-data .empty-data-text{
+    font-size: 36px;
+}

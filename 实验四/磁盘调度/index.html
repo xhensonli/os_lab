@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实验四</title>
+    <script src="../../static/js/jquery-3.3.1.min.js"></script>
+    <script src="../../static/js/vue.js"></script>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="index.css">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../static/css/element.css">
+    <script src="../../static/js/element.js"></script>
+</head>
+<body>
+    <div id="main" >
+        <div id="btn-bar">
+            <el-button v-for="item in tracks" @click="addTask(item)">访问{{item}}号磁道</el-button>
+        </div>
+        <div class="system-msgs">
+            <div class="pointer-status">
+                <div class="msg-title">指针状态</div>
+                {{getStatusMsg()}}
+            </div>
+            <div class="schedule-order">
+                <div class="msg-title">调度顺序</div>
+                {{orderList}}
+            </div>
+            <div class="finding-time">
+                <div class="msg-title">平均寻道时间</div>
+                {{(findingTime / orderList.length).toFixed(2)}}
+            </div>
+        </div>
+
+
+
+
+        <div id="disk-display">
+            <div class="track" v-for="item in tracks" :style="{width: item * 70 + 'px', height: item * 70 + 'px', top: 100 + (8 - item) * 35 + 'px', left: 150 + (8 - item) * 35 + 'px'}"></div>
+            <div class="pointer" :style="{height: (8 - current) * 35 + 'px'}" :class="{'reading-pointer': status === 1}"></div>
+        </div>
+
+        <div class="queue" :class="{using: usingQ1}">
+            <div class="queue-item" v-for="(task, index) in queue1" :style="{top: index * 30 + 'px'}"
+                :class="{'reading-item': usingQ1 && status === 1 && index === queue1.indexOf(target)}"
+            >{{task}}</div>
+        </div>
+        <div class="queue" :class="{using: !usingQ1}">
+            <div class="queue-item" v-for="(task, index) in queue2" :style="{top: index * 30 + 'px'}"
+                 :class="{'reading-item': !usingQ1 && status === 1 && index === queue2.indexOf(target)}"
+            >{{task}}</div>
+        </div>
+    </div>
+</body>
+</html>

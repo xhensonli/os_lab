@@ -1,0 +1,83 @@
+#serve-type-select{
+    display: flex;
+    text-align: center;
+}
+#job-type-select, #process-type-select {
+    flex-direction: row;
+    margin-left: 300px;
+    text-align: center;
+    margin-top: 25px;
+}
+
+#time-display {
+    width: 400px;
+    margin: 0 auto;
+}
+/*#serve-type-select {*/
+    /**/
+/*}*/
+
+#resource-control {
+    float: left;
+    margin: 20px;
+}
+#resource-control > div{
+    float: left;
+    margin: 10px;
+}
+#add-job-btn-bar {
+    float: left;
+
+    margin: 20px;
+}
+
+.display-tables {
+    display: flex;
+    width: 100%;
+}
+.display-area-job {
+    width: 39%;
+    flex-direction: row;
+    margin: 0 auto;
+    /*margin: 30px auto;*/
+}
+
+.display-area-process {
+    width: 32%;
+    flex-direction: row;
+    /*margin: 30px auto;*/
+}
+
+.display-area-mem {
+    width: 25%;
+    flex-direction: row;
+}
+
+
+.el-table .running-row {
+    background: #f0f9eb;
+}
+
+.el-table .waiting-row {
+    background: oldlace;
+}
+.el-table .finish-row {
+    background: #f4f4f4;
+}
+
+
+
+
+.empty-data{
+    margin-top: 150px;
+    text-align: center;
+    color: dodgerblue;
+    opacity: .3;
+}
+.empty-data .empty-box{
+    font-size: 128px;
+    padding-bottom: 25px;
+}
+.empty-data .empty-data-text{
+    font-size: 36px;
+}
